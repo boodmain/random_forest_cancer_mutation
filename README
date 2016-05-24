@@ -110,12 +110,6 @@ PREDICT_SET="../Random_Forest/Predict_set/Data/My_Predict_set.tsv"
 PREDICT_LIST="../Random_Forest/Predict_set/Data/My_Predict_set_list.tsv"
 
 ./train_and_predict.sh $TRAIN_SET  $PREDICT_SET $PREDICT_LIST  > Result_Predict.tsv
-ln -s ../../Random_Forest/Lung_Cancer_5kb/Data/My_FinalSet_Training.tsv Train_set.tsv
-ln -s ../../Random_Forest/Predict_set/Data/My_Predict_set.tsv Predict_set.tsv
-ln -s ../../Random_Forest/Predict_set/Data/My_Predict_set_list.tsv Predict_list.tsv
-cd ..
-
-./train_and_predict.sh TEMP/Train_set.tsv  TEMP/Predict_set.tsv TEMP/Predict_list.tsv  > Result_Predict.tsv
 #Main_script           --trainig set--     ====feature set and list for prediction===   ------output------
 cd ..
 cp Predict/Result_Predict.tsv Lung_Cancer_Predict.tsv
