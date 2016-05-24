@@ -1,4 +1,6 @@
 
+rm -rf TEMP
+mkdir TEMP
 
 BED_INPUT=$1
 PREDICT_LIST=$2
@@ -36,4 +38,4 @@ cat $PREDICT_TEMP $BED_INPUT \
        }
 '
 
-rm -f TEMP/*
+rm -rf TEMP

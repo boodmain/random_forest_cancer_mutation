@@ -1,4 +1,6 @@
 
+rm -rf TEMP
+mkdir TEMP
 
 INPUT=$1
 BED1="1.Breast_Cancer_GWAS_LDsnp.hg19.bed"
@@ -46,5 +48,5 @@ paste $RESULT1 $RESULT2 $RESULT3 \
 '
 
 
-rm -f TEMP/*
+rm -rf TEMP
 

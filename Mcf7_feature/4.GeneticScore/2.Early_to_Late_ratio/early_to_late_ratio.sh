@@ -1,6 +1,9 @@
 #Early-to-late ratio was calculated as (G1B + S1)/(S4 + G2).
 #Ref: http://www.nature.com/nature/journal/v488/n7412/full/nature11273.html
 
+rm -rf TEMP
+mkdir TEMP
+
 INPUT=$1
 
 TEMP_G1B="TEMP/G1b.tsv"
@@ -53,4 +56,4 @@ cat $TEMP_ALL \
     }
 '
 
-rm -f TEMP/*
+rm -rf TEMP

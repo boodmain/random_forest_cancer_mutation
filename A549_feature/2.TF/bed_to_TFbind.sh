@@ -1,4 +1,6 @@
 
+rm -rf TEMP
+mkdir TEMP
 
 INPUT=$1
 MEME_DATA="humanMatrix.meme.dat"
@@ -188,4 +190,4 @@ cat $RESULT_ALL \
   }
 '
 
-rm -f TEMP/*
+rm -rf TEMP

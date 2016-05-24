@@ -1,6 +1,9 @@
 
 INPUT=$1
 
+rm -rf TEMP
+mkdir TEMP
+
 #-------INPUT-BED-(A)------------------------------------------- ======SIGNAL=BED=(B)=======
 #chr1    2005390 2005391 G       A       chr1:2005391    PRKCZ   .       -1      -1      .
 #chr1    2144144 2144145 G       A       chr1:2144145    C1orf86 chr1    2144005 2144155 32
@@ -74,3 +77,5 @@ paste $RESULT0 $RESULT1 $RESULT2 $RESULT3 $RESULT4 $RESULT5 $RESULT6 $RESULT7 $R
 #104      .       .        .        .       .       .       .        49.33  .       .
 
 
+
+rm -rf TEMP

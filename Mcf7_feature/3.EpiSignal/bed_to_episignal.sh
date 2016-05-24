@@ -1,4 +1,7 @@
 
+rm -rf TEMP
+mkdir TEMP
+
 INPUT=$1
 
 #-------INPUT-BED-(A)------------------------------------------- ======SIGNAL=BED=(B)=======
@@ -56,4 +59,4 @@ paste $RESULT0 $RESULT1 $RESULT2 $RESULT3 $RESULT4 $RESULT5 \
 #.        .       49.33    .        .       .
 
 
-rm -f TEMP/*
+rm -rf TEMP

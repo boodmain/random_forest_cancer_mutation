@@ -1,3 +1,3 @@
 
-rm -f TEMP/*
+rm -f TEMP
 

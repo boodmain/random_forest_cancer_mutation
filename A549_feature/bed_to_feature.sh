@@ -33,6 +33,9 @@ echo "6th and the latters will not be used"
 echo ""
 fi
 
+rm -rf TEMP
+mkdir TEMP
+
 INPUT=$1
 STEP0="TEMP/STEP0.bed"
 STEP1="TEMP/STEP1.bed"
@@ -103,4 +106,4 @@ cd ..
 paste $RESULT0 $RESULT1 $RESULT2 $RESULT3 $RESULT4 \
 > $OUTPUT
 
-rm -f TEMP/*
+rm -rf TEMP

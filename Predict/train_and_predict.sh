@@ -1,4 +1,6 @@
 
+rm -rf TEMP
+mkdir TEMP
 
 TRAIN_SET=$1
 PREDICT_SET=$2
@@ -13,4 +15,4 @@ Rscript ./train_and_predict.R $TRAIN_SET $PREDICT_SET $RESULT_CLASS $RESULT_PROB
 
 paste $PREDICT_LIST $RESULT_CLASS $RESULT_PROB
 
-rm -f TEMP/*
+rm -rf TEMP
