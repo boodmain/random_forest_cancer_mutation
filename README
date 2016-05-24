@@ -17,6 +17,7 @@
 # bigWigAverageOverBed # http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/bigWigAverageOverBed
 # bigWigToBedGraph     # http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/bigWigToBedGraph
 # wigToBigWig          # http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/wigToBigWig
+# fimo                 # of the MEME suite http://meme-suite.org/
 
 
 ### Predict of mutation need 4 steps
@@ -80,13 +81,12 @@ cd ..
 #     from feature table (<-3) #
 #     and Classifier (<-2)     #
 ################################
-cd Predict/TEMP
-ln -s ../../Random_Forest/Breast_Cancer_5kb/Data/My_FinalSet_Training.tsv Train_set.tsv
-ln -s ../../Random_Forest/Predict_set/Data/My_Predict_set.tsv Predict_set.tsv
-ln -s ../../Random_Forest/Predict_set/Data/My_Predict_set_list.tsv Predict_list.tsv
-cd ..
+cd Predict
+TRAIN_SET="../Random_Forest/Breast_Cancer_5kb/Data/My_FinalSet_Training.tsv"
+PREDICT_SET="../Random_Forest/Predict_set/Data/My_Predict_set.tsv"
+PREDICT_LIST="../Random_Forest/Predict_set/Data/My_Predict_set_list.tsv"
 
-./train_and_predict.sh TEMP/Train_set.tsv  TEMP/Predict_set.tsv TEMP/Predict_list.tsv  > Result_Predict.tsv
+./train_and_predict.sh $TRAIN_SET  $PREDICT_SET $PREDICT_LIST  > Result_Predict.tsv
 #Main_script           --trainig set--     ====feature set and list for prediction===   ------output------
 cd ..
 cp Predict/Result_Predict.tsv Breast_Cancer_Predict.tsv
@@ -104,7 +104,12 @@ cd Random_Forest/
 ./prepare_predict.sh ../A549_feature/test.feature.tsv Data/Gene_Score/Lung_Cancer.tsv
 cd ..
 
-cd Predict/TEMP
+cd Predict
+TRAIN_SET="../Random_Forest/Lung_Cancer_5kb/Data/My_FinalSet_Training.tsv"
+PREDICT_SET="../Random_Forest/Predict_set/Data/My_Predict_set.tsv"
+PREDICT_LIST="../Random_Forest/Predict_set/Data/My_Predict_set_list.tsv"
+
+./train_and_predict.sh $TRAIN_SET  $PREDICT_SET $PREDICT_LIST  > Result_Predict.tsv
 ln -s ../../Random_Forest/Lung_Cancer_5kb/Data/My_FinalSet_Training.tsv Train_set.tsv
 ln -s ../../Random_Forest/Predict_set/Data/My_Predict_set.tsv Predict_set.tsv
 ln -s ../../Random_Forest/Predict_set/Data/My_Predict_set_list.tsv Predict_list.tsv
