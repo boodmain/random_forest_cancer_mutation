@@ -1,0 +1,6 @@
+#TEST
+./train_and_predict.sh \
+    Prebuilt_Data/Train_set_Breast_Cancer_5kb.tsv \
+    Prebuilt_Data/Predict_set_Breast_Cancer.tsv \
+    Prebuilt_Data/Predict_list_Breast_Cancer.tsv \
+  > Result_Predict.tsv

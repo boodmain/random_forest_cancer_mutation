@@ -1,0 +1,110 @@
+
+# Predict of mutation need 4 steps
+# 1. Training Random Forest
+# 2. Download RAW Data Files
+# 3. Generating feature table
+# 4. Predict mutation
+
+
+
+###############################
+# 1. Training Random Forest   #
+###############################
+cd Random_Forest/
+./run.sh
+# Train classifiers from pre-built training set
+cd ..
+
+
+
+###############################
+# 2. Download RAW Data Files  #
+###############################
+cd RAW_Data/
+./download.sh
+# Download and manipulate
+# 1. hg19.fa for TF binding
+# 2. chr*.phastCons100way.bedGraph for phastCons
+cd ..
+
+
+
+###########################################
+# A. Predict for Breast Cancer Mutations  #
+###########################################
+################################
+# 3A. Generating feature table #
+################################
+cd Mcf7_feature/
+./bed_to_feature.sh test.bed  test.feature.tsv
+#Main_script        --input-  -----output-----
+#
+# Convert BED file (mutation) to Feature table
+#./bed_to_feature.sh input.bed output.feature.tsv
+cd ..
+
+#Converting to Full feature Table
+cd Random_Forest/
+./prepare_predict.sh ../Mcf7_feature/test.feature.tsv Data/Gene_Score/Breast_Cancer.tsv
+#Converting script   --feature table input----------  ----Gene score input-------------
+#
+#Two files are created
+#. Predict_set/Data/My_Predict_set.tsv
+#. Predict_set/Data/My_Predict_set_list.tsv
+cd ..
+
+
+
+################################
+# 4A. Predict mutation         #
+#     from feature table (<-3) #
+#     and Classifier (<-2)     #
+################################
+cd Predict/TEMP
+ln -s ../../Random_Forest/Breast_Cancer_5kb/Data/My_FinalSet_Training.tsv Train_set.tsv
+ln -s ../../Random_Forest/Predict_set/Data/My_Predict_set.tsv Predict_set.tsv
+ln -s ../../Random_Forest/Predict_set/Data/My_Predict_set_list.tsv Predict_list.tsv
+cd ..
+
+./train_and_predict.sh TEMP/Train_set.tsv  TEMP/Predict_set.tsv TEMP/Predict_list.tsv  > Result_Predict.tsv
+#Main_script           --trainig set--     ====feature set and list for prediction===   ------output------
+cd ..
+cp Predict/Result_Predict.tsv Breast_Cancer_Predict.tsv
+
+
+###########################################
+# B. Predict for Lung Cancer Mutations    #
+###########################################
+cd A549_feature/
+./bed_to_feature.sh test.bed  test.feature.tsv
+cd ..
+
+#Converting to Full feature Table
+cd Random_Forest/
+./prepare_predict.sh ../A549_feature/test.feature.tsv Data/Gene_Score/Lung_Cancer.tsv
+cd ..
+
+cd Predict/TEMP
+ln -s ../../Random_Forest/Lung_Cancer_5kb/Data/My_FinalSet_Training.tsv Train_set.tsv
+ln -s ../../Random_Forest/Predict_set/Data/My_Predict_set.tsv Predict_set.tsv
+ln -s ../../Random_Forest/Predict_set/Data/My_Predict_set_list.tsv Predict_list.tsv
+cd ..
+
+./train_and_predict.sh TEMP/Train_set.tsv  TEMP/Predict_set.tsv TEMP/Predict_list.tsv  > Result_Predict.tsv
+#Main_script           --trainig set--     ====feature set and list for prediction===   ------output------
+cd ..
+cp Predict/Result_Predict.tsv Lung_Cancer_Predict.tsv
+
+
+
+################################
+# 5. Gene-level Burden         #
+#     from Mut-Sample Pair     #
+#     and Prediction (<-4)     #
+################################
+
+cd Gene_level_burden
+./bed_to_gene_level_burden.sh ./test_mut_sample.bed ../Breast_Cancer_Predict.tsv \
+> ../Breast_Cancer_GeneBurden.tsv
+
+cd ..
