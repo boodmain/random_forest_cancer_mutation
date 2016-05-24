@@ -18,6 +18,10 @@
 #chr1	4553699	4553700	C	G	ICGC-c364e81c-eb1e-4870-ab37-9c661f5f2e3d	Breast_ICGC
 #chr1	4562000	4562001	C	T	ICGC-5ed024e8-d05e-4c65-9441-eda9930ccc82	Breast_ICGC
 
+rm -rf TEMP
+mkdir TEMP
+
+
 if [ "$#" -lt "2" ]
 then
 echo ""
@@ -105,4 +109,4 @@ cd ..
 paste $RESULT0 $RESULT1 $RESULT2 $RESULT3 $RESULT4 \
 > $OUTPUT
 
-rm -f TEMP/*
+rm -rf TEMP
