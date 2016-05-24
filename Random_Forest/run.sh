@@ -46,20 +46,18 @@ done
 for var in $DIR_LIST
 do
     scripts/preproc_train_set.sh $var
-    #scripts/preproc_train_set.sh $var
 done
 
-WORK_PID=`jobs -l | awk '{print $2}'`
-wait $WORK_PID
+#WORK_PID=`jobs -l | awk '{print $2}'`
+#wait $WORK_PID
 
 
 #5-fold CV
 for var in $DIR_LIST
 do
     scripts/train_RF_10x5FCV.sh $var
-    #scripts/train_RF_10x5FCV.sh $var
 done
 
-WORK_PID=`jobs -l | awk '{print $2}'`
-wait $WORK_PID
+#WORK_PID=`jobs -l | awk '{print $2}'`
+#wait $WORK_PID
 

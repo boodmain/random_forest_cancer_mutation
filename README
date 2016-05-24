@@ -1,9 +1,29 @@
 
-# Predict of mutation need 4 steps
-# 1. Training Random Forest
-# 2. Download RAW Data Files
-# 3. Generating feature table
-# 4. Predict mutation
+# Predict of mutation need pre-installed utils and packages
+#
+# <R packages>
+# Rscript
+# install.packages("caret")
+# install.packages("randomForest")
+# install.packages("ROCR")
+#
+# <shell scripts>
+# awk        # GNU Awk 3.1.7
+# wget       # GNU Wget 1.12 built on linux-gnu
+#
+# <tools for bioinformatics>
+# bedtools             # bedtools v2.25.0
+# twoBitToFa           # http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/twoBitToFa
+# bigWigAverageOverBed # http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/bigWigAverageOverBed
+# bigWigToBedGraph     # http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/bigWigToBedGraph
+# wigToBigWig          # http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/wigToBigWig
+
+
+### Predict of mutation need 4 steps
+### 1. Training Random Forest
+### 2. Download RAW Data Files
+### 3. Generating feature table
+### 4. Predict mutation
 
 
 

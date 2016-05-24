@@ -18,7 +18,9 @@ cd     bedGraphs
 
 for i in `seq 1 22` X Y
 do
+    echo "wigToBigWig chr$i" 1>&2
     wigToBigWig ../wigFix/chr$i.phastCons100way.wigFix ../hg19.chrom.sizes out.bw
+    echo "bigWigToBedGraph chr$i" 1>&2
     bigWigToBedGraph out.bw chr$i.phastCons100way.bedGraph
 done
 
