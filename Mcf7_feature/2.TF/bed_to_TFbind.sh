@@ -3,8 +3,8 @@ rm -rf TEMP
 mkdir TEMP
 
 INPUT=$1
-MEME_DATA="humanMatrix.meme.dat"
-BED2="2.DnaseMcf7.bed"
+MEME_DATA="cellpwm_meme.dat"
+BED2="2.Dnase.bed"
 
 
 STEP21="TEMP/STEP21.bed"
@@ -84,9 +84,12 @@ fimo -text -parse-genomic-coord -thresh 1e-5 $MEME_DATA $FASTA2  > $FIMO2  2> $L
 
 # if ref = 10e-5, alt = 10e-7,
 # avg = 6, diff = 2, sign = GAIN
-cat $FIMO1R | awk -F"[_\t=]" 'NR>1{print $4 ":" $5 "*" $2 "\t" log($10)/log(10)}' > $TEMP1R
-cat $FIMO1A | awk -F"[_\t=]" 'NR>1{print $4 ":" $5 "*" $2 "\t" 0-(log($10)/log(10))}' > $TEMP1A
-cat $FIMO2  | awk -F"[_\t=]" 'NR>1{OFS="\t"; print $4, $5, $6, $2, $9}' | sortBed > $TEMP2
+cat $FIMO1R | awk -F"__" '{print $1 "\t" $2}' \
+            | awk -F"[\t=]" 'NR>1{print $3 ":" $4 "*" $1 "\t" log($9)/log(10)}' > $TEMP1R
+cat $FIMO1A | awk -F"__" '{print $1 "\t" $2}' \
+            | awk -F"[\t=]" 'NR>1{print $3 ":" $4 "*" $1 "\t" 0-(log($9)/log(10))}' > $TEMP1A
+cat $FIMO2  | awk -F"__" '{print $1 "\t" $2}' \
+            | awk -F"[\t=]" 'NR>1{OFS="\t"; print $3, $4, $5, $1, 0-log($8)}' | sortBed > $TEMP2
 
 #chr1:123456*GENE1    -3.5  (REF)
 #chr1:123456*GENE1    4.5   (ALT)
@@ -190,4 +193,4 @@ cat $RESULT_ALL \
   }
 '
 
-rm -rf TEMP
+#rm -rf TEMP
